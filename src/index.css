@@ -1,0 +1,111 @@
+:root {
+  --bg: #0a0c16;
+  --bg2: #0d0f1a;
+  --card: #13152b;
+  --card2: #1a1d35;
+  --card3: #20233d;
+  --border: #252845;
+  --border2: #2e3358;
+  --gold: #f59e0b;
+  --gold2: #e8a838;
+  --goldDim: #f59e0b15;
+  --accent: #ea580c;
+  --accentDim: #ea580c15;
+  --green: #10b981;
+  --greenDim: #10b98115;
+  --orange: #f97316;
+  --orangeDim: #f9731615;
+  --red: #ef4444;
+  --redDim: #ef444415;
+  --blue: #3b82f6;
+  --blueDim: #3b82f615;
+  --purple: #8b5cf6;
+  --purpleDim: #8b5cf615;
+  --text: #f1f3ff;
+  --text2: #c8cde8;
+  --sub: #7a82a8;
+  --radius: 14px;
+  --rsm: 9px;
+  --shadow: 0 8px 40px rgba(0,0,0,0.5);
+  --shadow2: 0 2px 16px rgba(0,0,0,0.3);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--card); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+input, select, textarea, button { font-family: inherit; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.fade-in { animation: fadeIn 0.3s ease forwards; }
+.slide-in { animation: slideIn 0.3s ease forwards; }
+
+.spinner {
+  width: 20px; height: 20px;
+  border: 2px solid var(--border2);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* Toast */
+.toast-wrap {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+  display: flex; flex-direction: column; gap: 8px; pointer-events: none;
+}
+.toast {
+  background: var(--card2);
+  border: 1px solid var(--border2);
+  border-radius: var(--rsm);
+  padding: 12px 20px;
+  font-size: 13px; font-weight: 600;
+  box-shadow: var(--shadow);
+  animation: fadeIn 0.3s ease;
+  pointer-events: all;
+  display: flex; align-items: center; gap: 8px;
+}
+.toast.success { border-left: 3px solid var(--green); }
+.toast.error   { border-left: 3px solid var(--red); }
+.toast.info    { border-left: 3px solid var(--blue); }
+
+/* Glassmorphism cards */
+.glass {
+  background: rgba(19, 21, 43, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Gradient text */
+.grad-text {
+  background: linear-gradient(135deg, var(--gold2), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
