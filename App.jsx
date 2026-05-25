@@ -9,25 +9,32 @@ import { InspectionDetailPage } from './components/pages/InspectionDetailPage'
 import { HistoryPage, CustomersPage, ReportsPage } from './components/pages/OtherPages'
 import { AdminPanel } from './components/pages/admin/AdminPanel'
 import { NegotiatorDash } from './components/pages/negotiator/NegotiatorDash'
-import { LoadingOverlay } from './components/ui'
-import './index.css'
+
+function Loading() {
+  return (
+    <div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',background:'#0a0c16',flexDirection:'column',gap:14}}>
+      <div className="spinner" style={{width:36,height:36,borderWidth:3}}/>
+      <div style={{color:'#7880a0',fontSize:14}}>Loading…</div>
+    </div>
+  )
+}
 
 function ProtectedRoute({ children, roles }) {
   const { user, profile, loading } = useAuth()
-  if (loading) return <LoadingOverlay message="Loading…" />
+  if (loading) return <Loading />
   if (!user) return <Navigate to="/login" replace />
-  if (roles && !roles.includes(profile?.role)) return <Navigate to="/" replace />
+  if (roles && profile && !roles.includes(profile.role)) return <Navigate to="/" replace />
   return <Layout>{children}</Layout>
 }
 
 function PublicRoute({ children }) {
   const { user, loading } = useAuth()
-  if (loading) return <LoadingOverlay message="Loading…" />
+  if (loading) return <Loading />
   if (user) return <Navigate to="/" replace />
   return children
 }
 
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
@@ -50,5 +57,3 @@ function App() {
     </BrowserRouter>
   )
 }
-
-export default App
